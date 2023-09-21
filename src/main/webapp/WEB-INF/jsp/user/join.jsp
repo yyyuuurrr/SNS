@@ -12,26 +12,27 @@
 <body>
 	
 	<div id="wrap">
-		<header class="d-flex justify-content-center align-items-center">
-			<div class="d-flex">
-				<h2>marondalgram</h2>
-				<img width="20" src="https://cdn-icons-png.flaticon.com/128/717/717392.png">
-			</div>
-		</header>
-		<section class="contents d-flex justify-content-center">
-			<div class="input-box my-5">
-				<h4 class="text-center">회원 가입</h4>
-				<input type="text" placeholder="아이디" class="form-control mt-4" id="loginIdInput">
-				<input type="password" placeholder="비밀번호" class="form-control" id="passwordInput">
-				<input type="password" placeholder="비밀번호 확인" class="form-control mt-3" id="passwordConfirmInput">
-				<input type="text" placeholder="이름" class="form-control mt-3" id="nameInput">
-				<input type="text" placeholder="이메일" class="form-control mt-3" id="emailInput">
-				<button type="button" class="btn btn-primary btn-block mt-4" id="joinBtn">가입</button>
-			</div>
-		</section>
-		<footer class="d-flex justify-content-center align-items-center">
-			<div class="text-secondary">Copyright © marondalgram 2023</div>
-		</footer>
+		<div class="border">
+			<c:import url="/WEB-INF/jsp/include/header.jsp" />
+			<section class="contents d-flex justify-content-center">
+				<div class="input-box my-5">
+					<h4 class="text-center">회원 가입</h4>
+					<div class="d-flex">
+						<input type="text" placeholder="아이디" class="form-control mt-4" id="loginIdInput">
+						<button type="button" class="btn btn-secondary" id="isDuplicateIdBtn">중복확인</button>
+					</div>
+					<div class="text-success small d-none" id="avaliableText">사용 가능한 아이디 입니다.</div>
+					<div class="text-danger small d-none" id="duplicateText">중복된 아이디 입니다.</div>
+					
+					<input type="password" placeholder="비밀번호" class="form-control" id="passwordInput">
+					<input type="password" placeholder="비밀번호 확인" class="form-control mt-3" id="passwordConfirmInput">
+					<input type="text" placeholder="이름" class="form-control mt-3" id="nameInput">
+					<input type="text" placeholder="이메일" class="form-control mt-3" id="emailInput">
+					<button type="button" class="btn btn-primary btn-block mt-4" id="joinBtn">가입</button>
+				</div>
+			</section>
+			<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
+		</div>
 	</div>
 
 
@@ -42,6 +43,9 @@
 	
 	<script>
 		$(document).ready(function() {
+			// 중복확인 체크 여부
+			var isCheckDuplicate = false;
+			var isDuplicate = true;
 			
 			$("#joinBtn").on("click", function() {
 				let loginId = $("#loginIdInput").val();
@@ -53,6 +57,17 @@
 				
 				if(loginId == ""){
 					alert("아이디를 입력하세요");
+					return ;
+				}
+				
+				// 중복체크가 안된 경우
+				if(!isCheckDuplicate){
+					alert("아이디 중복확인");
+					return ;
+				}
+				
+				if(!isDuplicate){
+					alert("중복된 아이디");
 					return ;
 				}
 				
@@ -82,7 +97,7 @@
 					, data:{"loginId":loginId, "password":password, "name":name, "email":email}
 					, success:function(data) {
 						
-						if(data.reault == "success") {
+						if(data.result == "success") {
 							
 							location.href = "/user/login-view";
 						}else {
@@ -98,8 +113,53 @@
 				
 			});
 			
+			
+			$("#isDuplicateIdBtn").on("click", function() {
+				let id = $("#loginIdInput").val();
+				
+				if(id == ""){
+					alert("아이디를 입력하세요");
+					return ;
+				}
+				
+				
+				
+				
+				#.ajax({
+					type:"get"
+					, url:"/post/duplicate"
+					, data:{"loginId":loginId}
+					, success:function(data){
+						
+						isCheckDuplicate = true;
+						
+						if(data.isDuplicate){
+							// 중복 되었다
+							$("#duplicateText").removeClass("d-none");
+							$("#avaliableText").addClass("d-none");
+							
+							isDuplicate = true;
+							
+						}else {
+							// 중복되지 않았다
+							$("#avaliableText").removeClass("d-none");
+							$("#duplicateText").addClass("d-none");
+							
+							isDuplicate = false;
+						}
+					}
+					, error:function(){
+						alert("중복확인 에러");
+					}
+					
+					
+				})
+				
+			});		
+			
 	
 		});
 	</script>
+	
 </body>
 </html>

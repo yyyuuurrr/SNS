@@ -14,4 +14,10 @@ public class UserController {
 		
 	}
 
+	@GetMapping("/login-view")
+	public String loginInput() {		
+		return "user/login";
+		
+	}
+	
 }
