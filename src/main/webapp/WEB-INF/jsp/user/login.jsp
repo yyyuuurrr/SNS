@@ -17,9 +17,12 @@
 			<section class="contents d-flex justify-content-center">
 				<div class="input-box my-5"">
 					<h4 class="text-center">회원 가입</h4>
-					<input type="text" placeholder="아이디" class="form-control mt-4" id="loginIdInput">
-					<input type="password" placeholder="비밀번호" class="form-control" id="passwordInput">
-					<button type="button" class="btn btn-primary btn-block mt-4" id="loginBtn">로그인</button>
+					<form id="loginForm">
+						<input type="text" placeholder="아이디" class="form-control mt-4" id="loginIdInput">
+						<input type="password" placeholder="비밀번호" class="form-control" id="passwordInput">
+						<button type="submit" class="btn btn-primary btn-block mt-4" id="loginBtn">로그인</button>
+					</form>
+					<p class="text-center mt-3">회원이 아니신가요? <a href="/user/join.jsp">회원가입</a></p>
 				</div>
 			</section>
 			<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
@@ -33,11 +36,14 @@
 	<script>
 		$(document).ready(function() {
 			
-			$("#loginBtn").on("click", function() {			
+			//$("#loginBtn").on("click", function() {
+			$("#loginForm").on("submit", function(e) {
+				
+				// form 태그가 가진 페이지 이동 기능을 막자
+				e.preventDefault();
+				
 				let loginId = $("#loginIdInput").val();
 				let password = $("#passwordInput").val();
-				let passwordConfirm = $("#passwordConfirmInput").val();
-				
 				
 				if(loginId == ""){
 					alert("아이디를 입력하세요");
@@ -49,14 +55,10 @@
 					return ;
 				}
 				
-				if(password != passwordConfirm){
-					alert("비밀번호가 일치하지 않습니다");
-					return ;
-				}
 				
 				$.ajax({
 					type:"post"
-					, url:"post/main-view"
+					, url:"post/login-view"
 					, data:{"loginId":loginId, "password":password}
 					, success:function(data){
 						

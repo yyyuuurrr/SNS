@@ -14,12 +14,20 @@
 	<div id="wrap" class="bg-dark">
 		<section class="bg-secondary d-flex">
 			<div class="rogo bg-primary col-3">
-				<div class="rogo1 bg-danger d-flex ml-4 mt-3">
-					<h3>marondalgram</h3>
-					<img height="30" src="https://cdn-icons-png.flaticon.com/128/717/717392.png" class="ml-2">
-					<p>유림님 <a href="#">로그아웃</a></p>
+				<div>
+					<div class="rogo1 bg-danger d-flex ml-4 mt-3">
+						<h3>marondalgram</h3>
+						<img height="30" src="https://cdn-icons-png.flaticon.com/128/717/717392.png" class="ml-2">
+					</div>
+					<div class="d-flex align-items-end justify-content-between">
+						<p>유림님 <a href="#">로그아웃</a></p>
+					</div>				
 				</div>
-				<div class="menu bg-white"></div>
+				<nav class="menu nav bg-white d-flex">
+					<ul>
+						<li class="nav-item"><a class="nav-link"><img height="40" src="https://cdn-icons-png.flaticon.com/128/20/20176.png"><h4>홈</h4></a></li>
+					</ul>
+				</nav>
 			</div>
 			<div class="bg-warning col-9"></div>
 		</section>

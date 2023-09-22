@@ -17,9 +17,9 @@
 			<section class="contents d-flex justify-content-center">
 				<div class="input-box my-5">
 					<h4 class="text-center">회원 가입</h4>
-					<div class="d-flex">
-						<input type="text" placeholder="아이디" class="form-control mt-4" id="loginIdInput">
-						<button type="button" class="btn btn-secondary" id="isDuplicateIdBtn">중복확인</button>
+					<div class="d-flex  mt-3">
+						<input type="text" id="loginIdInput" class="form-control" placeholder="아이디">
+						<button type="button" class="btn btn-secondary btn-sm ml-2" id="isDuplicateBtn">중복확인</button>
 					</div>
 					<div class="text-success small d-none" id="avaliableText">사용 가능한 아이디 입니다.</div>
 					<div class="text-danger small d-none" id="duplicateText">중복된 아이디 입니다.</div>
@@ -47,6 +47,17 @@
 			var isCheckDuplicate = false;
 			var isDuplicate = true;
 			
+			$("#loginIdInput").on("click", function() {
+				
+				isCheckDuplicate = false;
+				isDuplicate = true;
+				
+				$("#avaliableText").addClass("d-none");
+				$("#duplicateText").addClass("d-none");
+							
+			});
+			
+			
 			$("#joinBtn").on("click", function() {
 				let loginId = $("#loginIdInput").val();
 				let password = $("#passwordInput").val();
@@ -66,8 +77,8 @@
 					return ;
 				}
 				
-				if(!isDuplicate){
-					alert("중복된 아이디");
+				if(isDuplicate){
+					alert("중복된 아이디입니다.");
 					return ;
 				}
 				
@@ -114,7 +125,7 @@
 			});
 			
 			
-			$("#isDuplicateIdBtn").on("click", function() {
+			$("#isDuplicateBtn").on("click", function() {
 				let id = $("#loginIdInput").val();
 				
 				if(id == ""){
@@ -122,14 +133,13 @@
 					return ;
 				}
 				
-				
-				
-				
-				#.ajax({
+						
+				$.ajax({
 					type:"get"
-					, url:"/post/duplicate"
-					, data:{"loginId":loginId}
+					, url:"/user/duplicate-id"
+					, data:{"loginId":id}
 					, success:function(data){
+						alert("")
 						
 						isCheckDuplicate = true;
 						
