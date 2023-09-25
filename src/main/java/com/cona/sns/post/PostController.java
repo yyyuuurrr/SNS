@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
 	
 	
-	@GetMapping("main-view")
-	public String main() {
-		return "post/main";
+	@GetMapping("input-view")
+	public String input() {
+		return "post/input";
+	}
+	
+	@GetMapping("post-view")
+	public String post() {
+		return "post/post";
 	}
 
 }

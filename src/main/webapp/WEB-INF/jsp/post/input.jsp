@@ -5,34 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글</title>
+<title>업로드</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/static/css_2/style.css" type="text/css">
 </head>
 <body>
 
-	<div id="wrap" class="bg-dark">
-		<section class="bg-secondary d-flex">
-			<div class="rogo bg-primary col-3">
-				<div>
-					<div class="rogo1 bg-danger d-flex ml-4 mt-3">
-						<h3>marondalgram</h3>
-						<img height="30" src="https://cdn-icons-png.flaticon.com/128/717/717392.png" class="ml-2">
+	<div id="wrap">
+		<section class="d-flex border">
+			<c:import url="/WEB-INF/jsp/include/head.jsp"/>
+			<div class="contents col-9">
+				<div class="d-flex justify-content-center align-items-center">
+					<div class="post-layout my-5">
+						<div class="d-flex">
+							<img width="40" src="https://cdn-icons-png.flaticon.com/128/7179/7179733.png"><p class="ml-2">유림</p>
+						</div>
+											
+						<textarea class="form-control mt-3" rows="7" placeholder="내용을 입력해주세요" id="contentInput"></textarea>
+						<input type="file" class="mt-2">
+						<div class="d-flex justify-content-end mt-4">
+							<button type="button" class="btn btn-secondary" id="saveBtn">업로드</button>
+						</div>
 					</div>
-					<div class="d-flex align-items-end justify-content-between">
-						<p>유림님 <a href="#">로그아웃</a></p>
-					</div>				
-				</div>
-				<nav class="menu nav bg-white d-flex">
-					<ul>
-						<li class="nav-item"><a class="nav-link"><img height="40" src="https://cdn-icons-png.flaticon.com/128/20/20176.png"><h4>홈</h4></a></li>
-					</ul>
-				</nav>
+				</div>			
 			</div>
-			<div class="bg-warning col-9"></div>
 		</section>
-		<footer class="bg-info text-center">Copyright © marondalgram 2023</footer>
+		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
+
 
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>        

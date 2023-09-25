@@ -139,7 +139,6 @@
 					, url:"/user/duplicate-id"
 					, data:{"loginId":id}
 					, success:function(data){
-						alert("")
 						
 						isCheckDuplicate = true;
 						

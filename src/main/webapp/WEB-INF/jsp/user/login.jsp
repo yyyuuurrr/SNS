@@ -55,12 +55,14 @@
 					return ;
 				}
 				
+				alert("")
 				
 				$.ajax({
 					type:"post"
-					, url:"post/login-view"
+					, url:"post/login"
 					, data:{"loginId":loginId, "password":password}
 					, success:function(data){
+						
 						
 						if(data.result == "success"){
 							
